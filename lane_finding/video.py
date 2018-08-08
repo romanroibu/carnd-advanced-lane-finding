@@ -1,3 +1,8 @@
+from .image import *
+
+import random
+import typing as t
+import numpy as np
 from moviepy.editor import VideoFileClip
 from IPython.display import HTML
 
@@ -23,9 +28,17 @@ class Video:
         return Video(clip)
 
     def process(self, f):
-        clip = self._clip.fl_image(f)
+        def raw_f(frame):
+            in_image  = Video.__image_from_frame(frame)
+            out_image = f(in_image)
+            return out_image._data
+        clip = self._clip.fl_image(raw_f)
         return Video(clip)
 
     def write(self, fpath, audio=False, progress_bar=True, verbose=True):
         return self._clip.write_videofile(fpath, audio=audio, progress_bar=progress_bar, verbose=verbose)
 
+    def __image_from_frame(frame: np.ndarray) -> Image:
+        frame = np.moveaxis(frame, -1, 0)
+        return RGBImage.fromChannels(frame)
+        
