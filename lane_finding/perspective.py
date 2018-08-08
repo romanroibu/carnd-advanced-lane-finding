@@ -17,7 +17,7 @@ class Perspective:
         return self._warp(image, self._I)
 
     def _warp(self, image, matrix):
-        input_data  = image.data()
+        input_data  = image._data
         size = image.rgb().size()
         output_data = cv2.warpPerspective(input_data, matrix, size, flags=cv2.INTER_LINEAR)
         return type(image)(output_data)

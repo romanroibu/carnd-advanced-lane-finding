@@ -18,11 +18,8 @@ class Image:
     def __init__(self, image: np.ndarray):
         self._data = image
 
-    def data(self):
-        return np.copy(self._data)
-
     def copy(self):
-        return type(self)(self.data())
+        return type(self)(np.copy(self._data))
 
     def height(self):
         return self._data.shape[0]
@@ -97,7 +94,7 @@ class Image:
 class BGRImage(Image):
 
     def bgr(self):
-        return BGRImage(self.data())
+        return BGRImage(self._data)
 
     def rgb(self):
         return RGBImage(cv2.cvtColor(self._data, cv2.COLOR_BGR2RGB))
@@ -116,7 +113,7 @@ class RGBImage(Image):
         return BGRImage(cv2.cvtColor(self._data, cv2.COLOR_RGB2BGR))
 
     def rgb(self):
-        return RGBImage(self.data())
+        return RGBImage(self._data)
 
     def hls(self):
         return HLSImage(cv2.cvtColor(self._data, cv2.COLOR_RGB2HLS))
@@ -134,7 +131,7 @@ class HLSImage(Image):
         return RGBImage(cv2.cvtColor(self._data, cv2.COLOR_HLS2RGB))
 
     def hls(self):
-        return HLSImage(self.data())
+        return HLSImage(self._data)
 
     def gray(self):
         return GrayImage(cv2.cvtColor(self._data, cv2.COLOR_HLS2GRAY))
@@ -153,7 +150,7 @@ class GrayImage(Image):
         return HLSImage.fromChannels((self._data,))
 
     def gray(self):
-        return GrayImage(self.data())
+        return GrayImage(self._data)
 
     def binary(self, thresh):
         binary_data = np.zeros_like(self._data)
@@ -174,7 +171,7 @@ class BinaryImage(Image):
         return self.gray().hls()
 
     def gray(self):
-        return GrayImage(self.data() * 255)
+        return GrayImage(self._data * 255)
 
 
 
