@@ -14,6 +14,20 @@ class Video:
     def __init__(self, clip):
         self._clip = clip
 
+    @property
+    def frame_count(self) -> int:
+        return int(self._clip.fps * self._clip.duration)
+
+    def __getitem__(self, key: int):
+        time  = float(key) / self._clip.fps
+        frame = self._clip.get_frame(time)
+        image = Video.__image_from_frame(frame)
+        return image
+
+    def random_frame(self) -> Image:
+        index = random.randint(0, self.frame_count-1)
+        return self[index]
+
     def subclip(self, start=0, end=None):
         clip = self._clip.subclip(start, end)
         return Video(clip)
