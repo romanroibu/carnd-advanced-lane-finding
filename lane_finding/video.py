@@ -18,14 +18,14 @@ class Video:
     def __init__(self, clip):
         self._clip = clip
 
-    def subclip(start=0, end=None):
+    def subclip(self, start=0, end=None):
         clip = self._clip.subclip(start, end)
         return Video(clip)
 
-    def process(f):
+    def process(self, f):
         clip = self._clip.fl_image(f)
         return Video(clip)
 
-    def write(fpath, audio=False, progress_bar=False, verbose=True):
-        return self._clip.write_videofile(white_output, audio=audio, progress_bar=progress_bar, verbose=verbose)
+    def write(self, fpath, audio=False, progress_bar=True, verbose=True):
+        return self._clip.write_videofile(fpath, audio=audio, progress_bar=progress_bar, verbose=verbose)
 
