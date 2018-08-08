@@ -2,11 +2,21 @@ import typing as t
 import numpy as np
 import cv2
 
+AnyImage = t.TypeVar('AnyImage')
+
 # Abstract base class
 class Image:
 
     def read(fpath):
         return BGRImage(cv2.imread(fpath))
+
+    def combine(src1: AnyImage, alpha: float, src2: AnyImage, beta: float, gamma: float=0) -> AnyImage:
+        data = cv2.addWeighted(src1._data, alpha, src2._data, beta, gamma)
+        return type(src1)(data)
+
+    def zeros_like(image: AnyImage):
+        data = np.zeros_like(image._data)
+        return type(image)(data)
 
     @classmethod
     def fromChannels(klass, channels):
