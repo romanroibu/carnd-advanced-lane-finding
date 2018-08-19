@@ -5,6 +5,8 @@ import typing as t
 import numpy as np
 from moviepy.editor import VideoFileClip
 
+FrameProcessingFunc = t.Callable[[Image], Image]
+
 class Video:
 
     def read(fpath):
@@ -28,12 +30,12 @@ class Video:
         index = random.randint(0, self.frame_count-1)
         return self[index]
 
-    def subclip(self, start=0, end=None):
+    def subclip(self, start: float=0, end: float=None):
         clip = self._clip.subclip(start, end)
         return Video(clip)
 
-    def process(self, f):
-        def raw_f(frame):
+    def process(self, f: FrameProcessingFunc):
+        def raw_f(frame: np.ndarray) -> np.ndarray:
             in_image  = Video.__image_from_frame(frame)
             out_image = f(in_image)
             return out_image._data
@@ -46,4 +48,3 @@ class Video:
     def __image_from_frame(frame: np.ndarray) -> Image:
         frame = np.moveaxis(frame, -1, 0)
         return RGBImage.fromChannels(frame)
-        
