@@ -31,14 +31,17 @@ class Image:
     def copy(self):
         return type(self)(np.copy(self._data))
 
+    @property
     def height(self):
         return self._data.shape[0]
 
+    @property
     def width(self):
         return self._data.shape[1]
 
+    @property
     def size(self):
-        return (self.width(), self.height())
+        return (self.width, self.height)
 
     def binary(self, thresh):
         return self.gray().binary(thresh)
