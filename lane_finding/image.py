@@ -2,7 +2,20 @@ import typing as t
 import numpy as np
 import cv2
 
+
+Color = t.Tuple[int, int, int]
+
+
+class Point(t.NamedTuple):
+    x: int
+    y: int
+
+
+Rectangle = t.NewType('Rectangle', t.Tuple[Point, Point])
+
+
 AnyImage = t.TypeVar('AnyImage')
+
 
 # Abstract base class
 class Image:
@@ -102,7 +115,8 @@ class Image:
 
         return type(self)(scaled)
 
-
+    def draw_rectangle(self, rectangle: Rectangle, color: Color, thickness: int=1):
+        cv2.rectangle(self._data, rectangle[0], rectangle[1], color, thickness)
 
 class BGRImage(Image):
 
@@ -185,6 +199,3 @@ class BinaryImage(Image):
 
     def gray(self):
         return GrayImage(self._data * 255)
-
-
-
