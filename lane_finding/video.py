@@ -45,6 +45,9 @@ class Video:
     def write(self, fpath, audio=False, progress_bar=True, verbose=True):
         return self._clip.write_videofile(fpath, audio=audio, progress_bar=progress_bar, verbose=verbose)
 
+    def write_gif(self, fpath, fps=None, loop=True, verbose=True):
+        return self._clip.write_gif(fpath, fps=fps, verbose=verbose, loop=loop)
+
     def __image_from_frame(frame: np.ndarray) -> Image:
         frame = np.moveaxis(frame, -1, 0)
         return RGBImage.fromChannels(frame)
