@@ -23,17 +23,14 @@ The goals / steps of this project are the following:
 [thresholded]: output/images/thresholded.jpg "Thresholded Binary Image"
 [warped]: output/images/warped.jpg "Warped Image"
 [detected]: output/images/detected.jpg "Detected Lanes Image"
-[output_image]: output/images/overlaid.jpg "Final Output Image"
-[project_video]: output/videos/project.mp4 "Project Video"
-[challenge_video]: output/videos/challenge.mp4 "Challenge Video"
-[harder_challenge_video]: output/videos/harder_challenge.mp4 "Harder Challenge Video"
+[output_image]: output/images/curved3.jpg "Output Image"
+[project_video_gif]: output/videos/project.gif "Project Video"
+[project_video_src]: output/videos/project.mp4 "Project Video"
 
 ### ⚙️ Camera Calibration
 
 ##### TODO:
 - [ ] Briefly state how you computed the camera matrix and distortion coefficients.
-- [ ] Provide an example of a distortion corrected calibration image.
-- [ ] Provide an example of a distortion corrected test image.
 
 ![][undistorted]
 
@@ -43,7 +40,6 @@ The goals / steps of this project are the following:
 
 ##### TODO:
 - [ ] Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.
-- [ ] Provide an example of a binary image result.
 
 ![][thresholded]
 
@@ -51,7 +47,6 @@ The goals / steps of this project are the following:
 
 ##### TODO:
 - [ ] Describe how (and identify where in your code) you performed a perspective transform
-- [ ] Provide an example of a transformed image.
 
 ![][warped]
 
@@ -59,8 +54,6 @@ The goals / steps of this project are the following:
 
 ##### TODO:
 - [ ] Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
-
-![][detected]
 
 ### ↩️ Curvature and Position Calculation
 
@@ -71,18 +64,11 @@ The goals / steps of this project are the following:
 
 ### 📷 Image Pipeline
 
-##### TODO:
-- [ ] Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
-
 ![][output_image]
 
 ### 📹 Video Pipeline
 
-##### TODO:
-- [ ] Show a GIF of the final video.
-- [ ] Provide a link to your final video output.
-
-![][project_video]
+[![][project_video_gif]][project_video_src]
 
 ## 🚧 Limitations
 
